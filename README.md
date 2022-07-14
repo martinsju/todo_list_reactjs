@@ -1,4 +1,11 @@
-# Todo List React Project
+# To-do List React Project
+
+### About
+
+An application where you can add your to-do tasks to a list, and they'll be saved on your browser localstorage.
+Still didn't do the style part, i'm going to use styled components.
+
+You can access the project at Vercel's link by clicking on https://todo-list-reactjs-sand.vercel.app/
 
 ## Available Scripts
 
