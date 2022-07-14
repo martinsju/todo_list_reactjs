@@ -1,11 +1,15 @@
 import React from "react";
+import styled from "styled-components";
 
-const Modal = ({isVisible, onCloseModal}) => {
-
+const Modal = ({ isVisible, onCloseModal }) => {
   return (
-    <div className="modalContainer" onClick={() => onCloseModal()}>
-      {isVisible && <h1>MODAL</h1>}
-    </div>
+    <>
+      {isVisible && (
+        <div className="modalContainer" onClick={onCloseModal}>
+          <h1>MODAL</h1>
+        </div>
+      )}
+    </>
   );
 };
 
