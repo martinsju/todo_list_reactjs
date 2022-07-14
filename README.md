@@ -3,6 +3,7 @@
 ### About
 
 An application where you can add your to-do tasks to a list, and they'll be saved on your browser localstorage.
+Once the item is clicked, a modal appears on the screen (this modal will show exactly wich task was clicked, soon)
 Still didn't do the style part, i'm going to use styled components.
 
 You can access the project at Vercel's link by clicking on https://todo-list-reactjs-sand.vercel.app/
