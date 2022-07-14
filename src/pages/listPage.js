@@ -53,6 +53,12 @@ const ListPage = () => {
     }
     console.log("ESTOU FECHANDO O MODAL");
   }
+
+  function renderItem(item) {
+    <li key={item.id} onClick={() => openModal(item)}>
+      {item.id}: {item.task}
+    </li>
+  }
  
   return (
     <div>
@@ -60,11 +66,7 @@ const ListPage = () => {
       <div className="list">
         <p>Todo List:</p>
         <ul>
-          {list.map((item) => (
-            <li key={item.id} onClick={() => openModal(item)}>
-              {item.id}: {item.task}
-            </li>
-          ))}
+          {list.map(renderItem)}
         </ul>
       </div>
       <input
