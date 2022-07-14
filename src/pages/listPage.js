@@ -55,9 +55,11 @@ const ListPage = () => {
   }
 
   function renderItem(item) {
-    <li key={item.id} onClick={() => openModal(item)}>
-      {item.id}: {item.task}
-    </li>
+    return(
+      <li key={item.id} onClick={() => openModal(item)}>
+        {item.id}: {item.task}
+      </li>
+    )
   }
  
   return (
