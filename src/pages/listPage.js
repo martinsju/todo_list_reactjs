@@ -2,43 +2,40 @@ import React, { useState, useEffect, useRef } from "react";
 import Modal from "../components/modal";
 
 // pre populated list
-const initialList = [
-  {
-    id: 1,
-    task: "Wash dishes",
-  },
-  {
-    id: 2,
-    task: "Study React",
-  },
-];
+const initialList = [];
 
 const listStorage = JSON.parse(localStorage.getItem("listKey"))
+const idStorage = JSON.parse(localStorage.getItem("idKey"));
 console.log("listStorage: ", listStorage)
 
 const ListPage = () => {
   const textInputRef = useRef()
   const [list, setList] = useState(listStorage || initialList)
   const [task, setTask] = useState("")
+  const [id, setID] = useState(idStorage || 1)
   const [toggleModal, setToggleModal] = useState(false)
 
   useEffect(() => {
     textInputRef.current.focus();
     localStorage.setItem("listKey", JSON.stringify(list))
-    console.log("task atual é ", list[list.length - 1])
-    console.log("useEffect is running");
   }, [list]);
 
+  useEffect(() => {
+    localStorage.setItem("idKey", JSON.stringify(id));
+  }, [id]);
+
   function handleChange(event) {
-    setTask(event.target.value);
-    console.log("setTask run");
+    setTask(event.target.value)
+    console.log("setTask run")
   }
 
   // add task in the list
   function handleClick() {
-    let lastID = list[list.length - 1].id;
-    setList([...list, { id: lastID + 1, task: task }])
-    setTask("");
+    if (task) {
+      setList([...list, { id: id, task: task }])
+      setTask("")
+      setID(prevValue => ++prevValue)
+    }
   }
 
   function openModal(item) {
@@ -47,16 +44,20 @@ const ListPage = () => {
   }
 
   function closeModal() {
-    // conditional to not click on li item
     if (toggleModal) {
       setToggleModal(false);
     }
-    console.log("ESTOU FECHANDO O MODAL");
+    console.log("i'm closing the modal now");
   }
 
   function renderItem(item) {
+
+    function onPress() {
+      openModal(item)
+    }
+
     return(
-      <li key={item.id} onClick={() => openModal(item)}>
+      <li key={item.id} onClick={onPress}>
         {item.id}: {item.task}
       </li>
     )
