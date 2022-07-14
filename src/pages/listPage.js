@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // pre populated list
 const initialList = [
@@ -12,39 +12,42 @@ const initialList = [
   }
 ];
 
-
-// EXTRA: remember to save new items in localstorage 
-
 const ListPage = () => {
+  let textInput = ''
   const [list, setList] = useState(initialList)
   const [task, setTask] = useState('')
-  // const [id, setId] = useState(list.)
+  
+  useEffect(() => {
+    textInput.focus()
+    console.log("useEffect is running");
+  }, [list])
   
   function handleChange(event) {
     setTask(event.target.value)
     console.log("setTask run");
   }
-
+  
+  // add task in the list
   function handleClick() {
-    // add task in the list
     let lastID = list[list.length -1].id
-    setList([...list, { id: lastID+1, task: task }])
+    setList([...list, { id: lastID + 1, task: task }])
+    setTask('')
+    // EXTRA: remember to save new items in localstorage 
   }
-
+  
   return (
     <div>
-      <h1>this is the todo list page</h1>
+      <h1>This is the To-do list page</h1>
       <div className='list'>
         <p>Todo List:</p>
         <ul>
           {list.map((item) => (
-            <li key={item.id}>{item.id} - {item.task}</li>
+            <li key={item.id}>{item.id}: {item.task}</li>
           ))}
         </ul>
       </div>
-      <input type="text" placeholder="type here your next task" value={task} onChange={handleChange}></input>
+      <input className='inputArea' type="text" placeholder="type here your next task" value={task} onChange={handleChange} ref={(input) => { textInput = input; }}></input>
       <button onClick={handleClick}>Add item</button>
-
     </div>
   )
 }
